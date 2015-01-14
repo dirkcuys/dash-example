@@ -3,8 +3,8 @@
 var viz = (function(jquery){
     var $ = jquery;
 
-    function loadGraph(){
-        $.getJSON('{{site.baseurl}}/data/community.p2pu.org/weekly.json', function( data ) {
+    function loadGraph(timeframe){
+        $.getJSON('{{site.baseurl}}/data/community.p2pu.org/' + timeframe + '.json', function( data ) {
 
             var ctx = document.getElementById("myChart").getContext("2d");
             var graph_data = {
@@ -32,5 +32,10 @@ var viz = (function(jquery){
 
         });
     }
-    loadGraph();
+    loadGraph('weekly');
+    $("input[type=radio]").click(function() {
+        loadGraph($(this).val());
+    });
+
+
 })($);
