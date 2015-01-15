@@ -4,7 +4,7 @@ var D3Chart = (function(){
         var margin = {top: 20, right: 20, bottom: 30, left: 40};
         var width = 960 - margin.left - margin.right;
         var height = 500 - margin.top - margin.bottom;
-        var barWidth = width/graphData.length + 1;
+        var barWidth = width/graphData.length;
 
         var x = d3.time.scale()
             .range([0, width]);
@@ -48,7 +48,9 @@ var D3Chart = (function(){
             .attr("x", function(d) { return x(new Date(d[0])); })
             .attr("width", barWidth)
             .attr("y", function(d) { return y(d[1]); })
-            .attr("height", function(d) { return height - y(d[1]); });
+            .attr("height", function(d) { return height - y(d[1]); })
+            .append("svg:title")
+            .text(function(d) { return d[0] + ' : ' + d[1]; });
     }
 
     return {
